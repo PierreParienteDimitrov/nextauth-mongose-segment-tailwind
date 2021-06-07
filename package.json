@@ -7,8 +7,13 @@
     "start": "next start"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "mongodb": "^3.5.9",
+    "mongoose": "^5.12.13",
+    "mongose": "*",
     "next": "latest",
+    "next-auth": "^3.25.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
