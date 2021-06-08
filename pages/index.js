@@ -1,30 +1,28 @@
+import Link from 'next/link';
 import Head from 'next/head';
-import AuthForm from '../components/auth/AuthForm';
-import { connectToDatabase } from '../util/mongodb';
 
-export default function Home({ isConnected }) {
+export default function Home() {
 	return (
-		<div className='container'>
+		<div className=''>
 			<Head>
 				<title>Sign Up</title>
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
 			<main>
-				<AuthForm />
+				<ul>
+					<li>
+						<Link href='/'>
+							<a>Home</a>
+						</Link>
+					</li>
+					<li>
+						<Link href='/signup'>
+							<a>Log In</a>
+						</Link>
+					</li>
+				</ul>
 			</main>
 		</div>
 	);
-}
-
-export async function getServerSideProps(context) {
-	await connectToDatabase();
-
-	// const isConnected = await client.isConnected();
-
-	const isConnected = true;
-
-	return {
-		props: { isConnected },
-	};
 }

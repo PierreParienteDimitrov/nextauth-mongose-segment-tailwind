@@ -1,4 +1,5 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
+import { signIn } from 'next-auth/client';
 
 // Create User /api/auth/signup
 async function createUser(email, password) {
@@ -21,6 +22,12 @@ async function createUser(email, password) {
 
 // Sign up form
 export default function AuthForm() {
+	const [isLogin, setIsLogin] = useState(true);
+
+	function switchAuthModeHandler() {
+		setIsLogin((prevState) => !prevState);
+	}
+
 	const emailInputRef = useRef();
 	const passwordInputRef = useRef();
 
@@ -35,17 +42,27 @@ export default function AuthForm() {
 
 		// Add Validation
 
-		try {
-			const result = await createUser(enteredEmail, enteredPassword);
+		if (isLogin) {
+			const result = await signIn('credentials', {
+				redirect: false,
+				email: enteredEmail,
+				password: enteredPassword,
+			});
+
 			console.log(result);
-		} catch (error) {
-			console.log(error);
+		} else {
+			try {
+				const result = await createUser(enteredEmail, enteredPassword);
+				console.log(result);
+			} catch (error) {
+				console.log(error);
+			}
 		}
 	}
 
 	return (
 		<section>
-			<h1>Sign Up</h1>
+			<h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
 			<form onSubmit={submitHandler}>
 				{/* Email */}
 				<div>
@@ -58,9 +75,16 @@ export default function AuthForm() {
 					<input type='password' id='password' required ref={passwordInputRef} />
 				</div>
 				{/* Actions */}
-				<div>
-					<button>Sign Up</button>
-				</div>
+				<button>{isLogin ? 'Login' : 'Create Account'}</button>
+
+				<br />
+				<br />
+				<br />
+				<h1>Or</h1>
+
+				<button type='button' onClick={switchAuthModeHandler}>
+					{isLogin ? 'Create new account' : 'Login with existing account'}
+				</button>
 			</form>
 		</section>
 	);
