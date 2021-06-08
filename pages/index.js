@@ -10,18 +10,7 @@ export default function Home() {
 			</Head>
 
 			<main>
-				<ul>
-					<li>
-						<Link href='/'>
-							<a>Home</a>
-						</Link>
-					</li>
-					<li>
-						<Link href='/signup'>
-							<a>Log In</a>
-						</Link>
-					</li>
-				</ul>
+				<h1>This is the homepage</h1>
 			</main>
 		</div>
 	);
