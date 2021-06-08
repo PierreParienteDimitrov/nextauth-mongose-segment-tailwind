@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { connectToDatabase } from '../../../util/mongodb';
 import { hashPassword } from '../../../util/hash';
 import User from '../../../models/users';
@@ -24,6 +25,14 @@ export default async function handler(req, res) {
 					res.status(422).json({
 						message: 'Invalid input - password should be at least 7 char long.',
 					});
+					return;
+				}
+
+				const existingUser = await User.findOne({ email: email }).exec();
+
+				if (existingUser) {
+					res.status(422).json({ message: 'user exists already' });
+					mongoose.connection.close();
 					return;
 				}
 
