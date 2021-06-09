@@ -1,7 +1,9 @@
 import { connectToDatabase } from '../util/mongodb';
 import AuthForm from '../components/auth/AuthForm';
+import { getSession } from 'next-auth/client';
 
-const signUp = ({ isConnected }) => {
+const signUp = ({ session }) => {
+	console.log(session);
 	return (
 		<div>
 			<AuthForm />
@@ -10,14 +12,19 @@ const signUp = ({ isConnected }) => {
 };
 
 export async function getServerSideProps(context) {
-	await connectToDatabase();
+	const session = await getSession({ req: context.req });
 
-	// const isConnected = await client.isConnected();
-
-	const isConnected = true;
+	if (session) {
+		return {
+			redirect: {
+				destination: '/profile',
+				permanent: false,
+			},
+		};
+	}
 
 	return {
-		props: { isConnected },
+		props: { session },
 	};
 }
 

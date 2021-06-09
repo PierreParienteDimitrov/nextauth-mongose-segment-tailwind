@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { signIn } from 'next-auth/client';
+import { useRouter } from 'next/router';
 
 // Create User /api/auth/signup
 async function createUser(email, password) {
@@ -22,14 +23,19 @@ async function createUser(email, password) {
 
 // Sign up form
 export default function AuthForm() {
+	// User email and password inputs
+	const emailInputRef = useRef();
+	const passwordInputRef = useRef();
+
+	// Switch to show either login or signup
 	const [isLogin, setIsLogin] = useState(true);
+
+	// Router
+	const router = useRouter();
 
 	function switchAuthModeHandler() {
 		setIsLogin((prevState) => !prevState);
 	}
-
-	const emailInputRef = useRef();
-	const passwordInputRef = useRef();
 
 	// Submit Function
 	async function submitHandler(event) {
@@ -38,7 +44,7 @@ export default function AuthForm() {
 		const enteredEmail = emailInputRef.current.value;
 		const enteredPassword = passwordInputRef.current.value;
 
-		console.log(enteredEmail);
+		// console.log(enteredEmail);
 
 		// Add Validation
 
@@ -49,7 +55,11 @@ export default function AuthForm() {
 				password: enteredPassword,
 			});
 
-			console.log(result);
+			if (!result.error) {
+				router.replace('/profile');
+			}
+
+			// console.log(result);
 		} else {
 			try {
 				const result = await createUser(enteredEmail, enteredPassword);
