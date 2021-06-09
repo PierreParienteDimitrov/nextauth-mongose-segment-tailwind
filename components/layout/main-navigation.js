@@ -12,13 +12,13 @@ function MainNavigation() {
 	}
 
 	return (
-		<header className=''>
+		<header className='w-screen h-12 bg-gray-200 px-10 flex items-center justify-between'>
 			<Link href='/'>
 				<a>
 					<div className=''>Next Auth</div>
 				</a>
 			</Link>
-			<nav>
+			<nav className='justify-items-end'>
 				<ul>
 					{!session && !loading && (
 						<li>
