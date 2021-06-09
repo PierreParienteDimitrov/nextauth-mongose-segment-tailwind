@@ -66,8 +66,15 @@ export default function AuthForm() {
 		} else {
 			try {
 				const result = await createUser(enteredEmail, enteredPassword);
-				// console.log(result);
-				router.replace('/profile');
+
+				console.log(result.success);
+
+				if (result.success) {
+					console.log('just before router replace');
+					router.replace('/protected');
+				} else {
+					alert('something went wrong');
+				}
 			} catch (error) {
 				console.log(error);
 			}
