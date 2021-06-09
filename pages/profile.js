@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
 import { getSession } from 'next-auth/client';
+import ProfileForm from '../components/profile/ProfileForm';
 
 function ProfilePage() {
 	return (
 		<div>
-			<h1>This will be the user profile</h1>
+			<h1>This is the user profile page</h1>
+			<ProfileForm />
 		</div>
 	);
 }

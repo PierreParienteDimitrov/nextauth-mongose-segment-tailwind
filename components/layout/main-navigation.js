@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useSession, sigOut, signOut } from 'next-auth/client';
+import { useSession, signOut } from 'next-auth/client';
 
 function MainNavigation() {
 	const [session, loading] = useSession();

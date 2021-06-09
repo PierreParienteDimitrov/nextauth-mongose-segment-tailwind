@@ -63,7 +63,8 @@ export default function AuthForm() {
 		} else {
 			try {
 				const result = await createUser(enteredEmail, enteredPassword);
-				console.log(result);
+				// console.log(result);
+				router.replace('/profile');
 			} catch (error) {
 				console.log(error);
 			}
