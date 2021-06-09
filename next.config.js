@@ -8,6 +8,7 @@ module.exports = (phase) => {
 				mongodb_password: '8GLXuv3o7ov9V5Wy',
 				mongodb_clustername: 'cluster0',
 				mongodb_database: 'dev-site',
+				NEXTAUTH_URL: 'http://localhost:3000',
 			},
 		};
 	}
@@ -18,6 +19,7 @@ module.exports = (phase) => {
 			mongodb_password: '8GLXuv3o7ov9V5Wy',
 			mongodb_clustername: 'cluster0',
 			mongodb_database: 'prod-site',
+			NEXTAUTH_URL: 'https://nextauth-mongose-segment-tailwind.vercel.app',
 		},
 	};
 };
