@@ -1,10 +1,11 @@
 import { getSession } from 'next-auth/client';
 import ProfileForm from '../components/profile/ProfileForm';
 
-function ProfilePage() {
+function ProfilePage({ session }) {
+	console.log(session);
 	return (
 		<div>
-			<h1>This is the user profile page</h1>
+			<h1>This is the user profile page for {session.user.email}</h1>
 			<ProfileForm />
 		</div>
 	);
@@ -26,5 +27,7 @@ export async function getServerSideProps(context) {
 		props: { session },
 	};
 }
+
+// ProfilePage.auth = true;
 
 export default ProfilePage;
