@@ -1,9 +1,8 @@
-import { connectToDatabase } from '../util/mongodb';
 import AuthForm from '../components/auth/AuthForm';
 import { getSession } from 'next-auth/client';
 
 const signUp = ({ session }) => {
-	console.log(session);
+	// console.log(session);
 	return (
 		<div>
 			<AuthForm />

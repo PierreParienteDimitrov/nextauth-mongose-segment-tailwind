@@ -10,9 +10,10 @@ export async function connectToDatabase() {
 	}
 
 	/* connecting to our database */
+	const connectionString = `mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_clustername}.23vfo.mongodb.net/${process.env.mongodb_database}?retryWrites=true&w=majority`;
 
 	try {
-		const db = await mongoose.connect(process.env.MONGODB_URI, {
+		const db = await mongoose.connect(connectionString, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 			useFindAndModify: false,
