@@ -19,12 +19,16 @@ export default NextAuth({
 					email: credentials.email,
 				}).exec();
 
+				console.log(user);
+
 				if (!user) {
 					mongoose.connection.close();
 					throw new Error('No user found');
 				}
 
 				const isValid = await verifyPassword(credentials.password, user.password);
+
+				console.log(isValid);
 
 				if (!isValid) {
 					mongoose.connection.close();

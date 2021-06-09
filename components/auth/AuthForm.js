@@ -58,6 +58,8 @@ export default function AuthForm() {
 
 			if (!result.error) {
 				router.replace('/profile');
+			} else {
+				alert('something went wrong');
 			}
 
 			// console.log(result);
